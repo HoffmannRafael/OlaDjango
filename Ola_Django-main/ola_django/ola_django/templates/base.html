@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Título Padrão{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'cadastrar_pessoa.css' %}">  <!-- Ajuste o caminho do CSS se necessário -->
+    <style>
+
+        .sidebar {
+            width: 20%; /* Ajuste a largura conforme necessário */
+            height: 100vh; /* Faz o menu ocupar toda a altura da tela */
+            background-color: #6608A4; /* Cor de fundo do menu */
+            padding: 30px; /* Espaçamento interno do menu */
+            position: fixed; /* Fixa o menu lateral */
+            top: 0; /* Fixa o menu no topo da página */
+            left: 0; /* Fixa o menu à esquerda da página */
+            color: white; /* Cor do texto */
+            box-sizing: border-box;
+        }
+
+        .sidebar ul {
+            list-style-type: none; /* Remove os marcadores da lista */
+            padding: 0; /* Remove o padding padrão */
+        }
+
+
+        .sidebar a {
+            color: white; /* Cor do texto dos links */
+            text-decoration: none; /* Remove o sublinhado dos links */
+            display: block; /* Faz o link ocupar toda a largura do item */
+            padding: 10px; /* Espaçamento interno dos links */
+        }
+
+        .sidebar a:hover {
+            background-color: #4b047a;
+
+        }
+
+        .sidebar h2 {
+            text-align: center; /* Centraliza o texto */
+            margin-bottom: 20px; /* Espaçamento abaixo do título */
+        }
+
+        .sidebar h2::after {
+            content: ""; /* Cria uma linha */
+            display: block; /* Faz a linha ocupar todo o espaço disponível */
+            width: 100%; /* A linha ocupará 100% da largura do título */
+            height: 1px; /* Espessura da linha */
+            background-color: white; /* Cor da linha */
+            margin-top: 10px; /* Espaçamento acima da linha */
+        }
+
+
+        .main-content {
+            width: 80%; /* Largura do conteúdo principal */
+            padding: 20px;
+            margin-left: 20%; /* Para compensar a largura do menu lateral */
+        }
+    </style>
+</head>
+<body>
+    <nav class="sidebar">
+        <h2>Menu</h2>
+        <ul>
+            <li><a href="{% url 'lista_pessoas' %}">Lista de Pessoas</a></li>
+            <li><a href="{% url 'cadastrar_pessoa' %}">Cadastrar Pessoa</a></li>
+            <li><a href="#">Outra Página</a></li>
+            <!-- Adicione mais itens de menu conforme necessário -->
+        </ul>
+    </nav>
+    
+    <main class="main-content">
+        {% block content %}
+        <!-- Conteúdo da página aqui -->
+        {% endblock %}
+    </main>
+</body>
+</html>

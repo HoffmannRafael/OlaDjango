@@ -1,0 +1,82 @@
+/* Estilo geral da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    height: 100vh; /* Define a altura do body para 100% da altura da viewport */
+    display: flex;
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+}
+
+.container {
+    max-width: 600px; /* Largura máxima do container */
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Largura do container será 100%, limitada pelo max-width */
+    box-sizing: border-box;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Estilo do formulário */
+.form-pessoa {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Maior espaçamento entre os campos */
+}
+
+.form-pessoa label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Campos de formulário */
+.form-pessoa input, .form-pessoa select, .form-pessoa textarea {
+    padding: 10px; /* Aumenta o padding para tornar os campos maiores */
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    width: 100%; /* Garante que os campos ocupem 100% da largura do container */
+    font-size: 14px;
+    box-sizing: border-box; /* Garante que o padding não afete a largura */
+}
+
+/* Botão de submit */
+.form-pessoa button {
+    background-color: #41AF3B; /* Cor do botão */
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Garante que o botão também tenha a largura total */
+}
+
+.form-pessoa button:hover {
+    background-color: #45a049; /* Cor do botão ao passar o mouse */
+}
+
+/* Estilo da barra de ações */
+.action-bar {
+    text-align: center;
+    margin-top: 20px; /* Espaço acima de cada ação */
+}
+
+.action-bar .action-link {
+    color: #6608A4;
+    text-decoration: none; /* Remove sublinhado de links */
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.action-bar .action-link:hover {
+    text-decoration: underline; /* Aplica sublinhado ao passar o mouse */
+}

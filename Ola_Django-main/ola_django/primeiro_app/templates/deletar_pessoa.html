@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Pessoas{% endblock %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deletar Pessoa</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'deletar_pessoa.css' %}">  <!-- Ajuste para o CSS de deletar -->
+</head>
+<body>
+    <div class="container">
+        <h1>Deletar Pessoa</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="action-bar">
+                <button type="submit" class="btn delete-btn">Deletar Pessoa</button>
+            </div>
+            <div class="action-bar"> <!-- Um novo container para o botão de voltar -->
+                <a href="{% url 'lista_pessoas' %}" class="btn btn-secondary">Voltar</a> <!-- Mantém a classe btn para estilo -->
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}

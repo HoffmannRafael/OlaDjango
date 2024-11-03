@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Pessoas{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Pessoas</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'lista_pessoas.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Pessoas Cadastradas</h1>
+        <div class="action-bar">
+            <a class="btn" href="{% url 'cadastrar_pessoa' %}">Cadastrar Pessoa</a>
+        </div>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Idade</th>
+                    <th>Email</th>
+                    <th>Tipo Pessoa</th>
+                    <th colspan="3">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pessoa in object_list %}
+                    <tr>
+                        <td>{{ pessoa.nome }}</td>
+                        <td>{{ pessoa.idade }}</td>
+                        <td>{{ pessoa.email }}</td>
+                        <td>{{ pessoa.tipo_pessoa }}</td>
+                        <td>
+                            <a class="action-link" href="{% url 'editar_pessoa' pessoa.id %}">Editar</a>
+                        </td>
+                        <td>
+                            <a class="action-link" href="{% url 'detalhe_pessoa' pessoa.id %}">Visualizar</a>
+                        </td>
+                        <td>
+                            <a class="action-link delete-link" href="{% url 'deletar_pessoa' pessoa.id %}">Deletar</a>
+                        </td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="7">Nenhuma pessoa cadastrada.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+{% endblock %}  <!-- Fim do bloco de conteúdo -->

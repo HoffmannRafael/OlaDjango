@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Pessoa{% endblock %}
+
+{% block content %}
+<div class="container">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'editar_pessoa.css' %}">  
+
+    <h1>Editar Pessoa</h1>
+
+    <form method="post" class="form-pessoa">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Salvar Alterações</button>
+    </form>
+
+    <div class="action-bar">
+        <a href="{% url 'lista_pessoas' %}" class="action-link">Voltar</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Cadastrar Pessoas{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Pessoa</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'cadastrar_pessoa.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>Cadastrar Nova Pessoa</h1>
+
+        <form method="post" class="form-pessoa">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn">Cadastrar</button>
+        </form>
+
+        <div class="action-bar">
+            <a href="{% url 'lista_pessoas' %}" class="action-link">Voltar</a>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

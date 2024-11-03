@@ -1,0 +1,100 @@
+/* Estilo geral da página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px; /* Largura máxima do container */
+    margin: 0 auto; /* Centraliza horizontalmente */
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Estilo do formulário */
+.form-pessoa {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Maior espaçamento entre os campos */
+}
+
+.form-pessoa label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Campos de formulário */
+.form-pessoa input, .form-pessoa select, .form-pessoa textarea {
+    padding: 10px; /* Aumenta o padding para tornar os campos maiores */
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    width: 100%; /* Garante que os campos ocupem 100% da largura do container */
+    font-size: 14px;
+    box-sizing: border-box; /* Garante que o padding não afete a largura */
+}
+
+/* Botão de submit */
+.form-pessoa button {
+    background-color: #41AF3B;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    width: 100%; /* Garante que o botão também tenha a largura total */
+}
+
+.form-pessoa button:hover {
+    background-color: #45a049;
+}
+
+/* Estilo da barra de ações */
+.action-bar {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.action-bar .action-link {
+    color: #6608A4;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.action-bar .action-link:hover {
+    text-decoration: underline;
+}
+
+table {
+    width: 100%; /* A tabela ocupa a largura total do container */
+    margin: 0 auto; /* Centraliza a tabela */
+    border-collapse: collapse; /* Remove espaçamentos entre células */
+    text-align: left;
+}
+
+table th, table td {
+    padding: 10px; /* Aumenta o padding para melhor visibilidade */
+    border-bottom: 1px solid #ddd;
+    text-align: left; /* Alinha o texto à esquerda */
+}
+
+table th {
+    background-color: #6608A4;
+    color: #fff;
+    text-align: left;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}

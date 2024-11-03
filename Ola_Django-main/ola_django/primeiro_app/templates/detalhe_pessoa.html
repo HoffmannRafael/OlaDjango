@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}Detalhes da Pessoa{% endblock %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'detalhe_pessoa.css' %}"> <!-- Inclui o CSS corretamente -->
+</head>
+<body>
+    <div class="container">
+        <h1>Detalhes da Pessoa</h1>
+        <table class="styled-table">
+            <tbody>
+                <tr>
+                    <td><strong>Nome:</strong></td>
+                    <td>{{ object.nome }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Idade:</strong></td>
+                    <td>{{ object.idade }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Email:</strong></td>
+                    <td>{{ object.email }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Tipo Pessoa:</strong></td>
+                    <td>{{ object.tipo_pessoa }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Histórico de Interações</h2>
+        <table class="styled-table">
+            <thead>
+                <tr>
+                    <th>Data e Hora</th>
+                    <th>Mensagem</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for interacao in interacoes_formatada %}
+                    <tr>
+                        <td>{{ interacao.data_hora }}</td>
+                        <td>{{ interacao.mensagem }}</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="2">Nenhuma interação registrada.</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="button-bar">
+            <a href="{% url 'lista_pessoas' %}" class="btn btn-roxo">Voltar</a>
+            <a href="{% url 'editar_pessoa' object.id %}" class="btn btn-verde">Editar</a>
+        </div>
+    </div>
+</body>
+</html>
+
+{% endblock content %}
