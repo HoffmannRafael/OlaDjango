@@ -49,16 +49,30 @@ class PerfilEconomia(models.Model):
     ]
     
     tipo = models.CharField(max_length=10, choices=TIPOS_ECONOMIA)
-    if TIPOS_ECONOMIA == "Passiva":
-        porcentagem_despesa_fixa = models.FloatField(default=50.0)
-        porcentagem_despesa_variavel = models.FloatField(default=5.0)
-        porcentagem_despesa_geral = models.FloatField(default=5.0)
-        porcentagem_investimento = models.FloatField(default=10.0)
-    elif TIPOS_ECONOMIA == "Agressiva":
-        porcentagem_despesa_fixa = models.FloatField(default=40.0)
-        porcentagem_despesa_variavel = models.FloatField(default=15.0)
-        porcentagem_despesa_geral = models.FloatField(default=5.0)
-        porcentagem_investimento = models.FloatField(default=30.0)
+    porcentagem_despesa_fixa = models.FloatField()
+    porcentagem_despesa_variavel = models.FloatField()
+    porcentagem_despesa_geral = models.FloatField()
+    porcentagem_investimento = models.FloatField()
+    
+    def ajustar_tipo_economia(self, renda_mensal):
+        despesas_fixas = Despesa.objects.filter(categoria="Fixa").aggregate(models.Sum('valor'))['valor_sum'] or 0
+        despesas_variaveis = Despesa.objects.filter(categoria="Variavel").aggregate(models.Sum('valor'))['valor_sum'] or 0
+        total_despesas = despesas_fixas + despesas_variaveis
+        
+        porcentagem_total_despesas = (total_despesas / renda_mensal) * 100
+
+        if porcentagem_total_despesas > 75:
+            self.tipo = 'Passiva'
+            self.porcentagem_despesa_fixa = 50.0
+            self.porcentagem_despesa_variavel = 5.0
+            self.porcentagem_despesa_geral = 5.0
+            self.porcentagem_investimento = 10.0
+        else:
+            self.tipo = 'Variavel'
+            self.porcentagem_despesa_fixa = 40.0
+            self.porcentagem_despesa_variavel = 15.0
+            self.porcentagem_despesa_geral = 5.0
+            self.porcentagem_investimento = 30.0
 
     def __str__(self):
         return f"{self.tipo} - Despesas F: {self.porcentagem_despesa_fixa}% Var: {self.porcentagem_despesa_variavel}% Geral: {self.porcentagem_despesa_geral}% Invest: {self.porcentagem_investimento}%"
