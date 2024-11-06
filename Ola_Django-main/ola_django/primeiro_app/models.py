@@ -49,10 +49,16 @@ class PerfilEconomia(models.Model):
     ]
     
     tipo = models.CharField(max_length=10, choices=TIPOS_ECONOMIA)
-    porcentagem_despesa_fixa = models.FloatField()
-    porcentagem_despesa_variavel = models.FloatField()
-    porcentagem_despesa_geral = models.FloatField()
-    porcentagem_investimento = models.FloatField()
+    if TIPOS_ECONOMIA == "Passiva":
+        porcentagem_despesa_fixa = models.FloatField(default=50.0)
+        porcentagem_despesa_variavel = models.FloatField(default=5.0)
+        porcentagem_despesa_geral = models.FloatField(default=5.0)
+        porcentagem_investimento = models.FloatField(default=10.0)
+    elif TIPOS_ECONOMIA == "Agressiva":
+        porcentagem_despesa_fixa = models.FloatField(default=40.0)
+        porcentagem_despesa_variavel = models.FloatField(default=15.0)
+        porcentagem_despesa_geral = models.FloatField(default=5.0)
+        porcentagem_investimento = models.FloatField(default=30.0)
 
     def __str__(self):
         return f"{self.tipo} - Despesas F: {self.porcentagem_despesa_fixa}% Var: {self.porcentagem_despesa_variavel}% Geral: {self.porcentagem_despesa_geral}% Invest: {self.porcentagem_investimento}%"
