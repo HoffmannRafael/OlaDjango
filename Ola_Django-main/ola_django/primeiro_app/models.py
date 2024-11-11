@@ -25,7 +25,7 @@ class InteracoesPessoa(models.Model):
 
     def __str__(self):
         return f"Interação com {self.pessoa.nome} em {self.data_hora}"
-    
+
 class Despesa(models.Model):
     CATEGORIAS = [
         ('Fixa', 'Despesa Fixa'),
@@ -76,3 +76,11 @@ class PerfilEconomia(models.Model):
 
     def __str__(self):
         return f"{self.tipo} - Despesas F: {self.porcentagem_despesa_fixa}% Var: {self.porcentagem_despesa_variavel}% Geral: {self.porcentagem_despesa_geral}% Invest: {self.porcentagem_investimento}%"
+
+class Investimentos(models.Model):
+    pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
+    valor = models.FloatField()
+    prazo = models.DateField()
+    frequencia = models.FloatField()
+    def __str__(self):
+        return f"[{self.pessoa.nome}] Investimento de R${self.valor} de frequência {self.frequencia} com prazo de encerramento em {self.prazo}."
