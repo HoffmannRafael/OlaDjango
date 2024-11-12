@@ -25,3 +25,14 @@ class InteracoesPessoa(models.Model):
 
     def __str__(self):
         return f"Interação com {self.pessoa.nome} em {self.data_hora}"
+
+
+class Meta(models.Model): 
+    pessoa = models.ForeignKey(Pessoa, on_delete=models.CASCADE)
+    titulo = models.TextField()
+    valor = models.FloatField()
+    data_inicial = models.DateField()
+    data_final = models.DateField()
+    
+    
+    

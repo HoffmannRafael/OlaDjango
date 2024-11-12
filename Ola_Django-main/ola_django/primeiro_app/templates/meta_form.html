@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>{% if form.instance.pk %}Editar Meta{% else %}Criar Nova Meta{% endif %}</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        
+        <!-- Renderiza o formulário -->
+        <div class="form-group">
+            {{ form.as_p }}
+        </div>
+
+        <!-- Botões de ação -->
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a href="{% url 'meta-list' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

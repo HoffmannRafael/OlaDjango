@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DetailView, DeleteView
-from .models import Pessoa, InteracoesPessoa
+from .models import Pessoa, InteracoesPessoa, Meta
 from .forms import PessoaCreateForm, PessoaUpdateForm, FormDeletePessoa 
 from django.contrib import messages
+
 # Create your views here.
 #criação da tela de cadastro de pessoa
 class PessoaCreateView(CreateView):
@@ -67,3 +68,41 @@ class PessoaDeleteView(DeleteView):
     form_class = FormDeletePessoa
     template_name = "deletar_pessoa.html"
     success_url = reverse_lazy('lista_pessoas')
+    
+    
+# Lista todas as metas
+class MetaListView(ListView):
+    model = Meta
+    template_name = 'metas/meta_list.html'
+    context_object_name = 'metas'
+
+# Detalhes de uma meta específica
+class MetaDetailView(DetailView):
+    model = Meta
+    template_name = 'metas/meta_detail.html'
+    context_object_name = 'meta'
+
+# Cria uma nova meta
+class MetaCreateView(CreateView):
+    model = Meta
+    form_class = MetaForm
+    template_name = 'metas/meta_form.html'
+    success_url = reverse_lazy('meta-list')
+
+    def form_valid(self, form):
+        # Configura o dono da meta como a pessoa logada, se necessário
+        form.instance.pessoa = self.request.user
+        return super().form_valid(form)
+
+# Atualiza uma meta existente
+class MetaUpdateView(UpdateView):
+    model = Meta
+    form_class = MetaForm
+    template_name = 'metas/meta_form.html'
+    success_url = reverse_lazy('meta-list')
+
+# Deleta uma meta
+class MetaDeleteView(DeleteView):
+    model = Meta
+    template_name = 'metas/meta_confirm_delete.html'
+    success_url = reverse_lazy('meta-list')

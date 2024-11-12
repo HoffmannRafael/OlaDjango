@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Detalhes da Meta</h1>
+
+    <div class="card">
+        <div class="card-body">
+            <h2>{{ meta.titulo }}</h2>
+            <p><strong>Valor:</strong> {{ meta.valor }}</p>
+            <p><strong>Data Inicial:</strong> {{ meta.data_inicial }}</p>
+            <p><strong>Data Final:</strong> {{ meta.data_final }}</p>
+            <p><strong>Pessoa:</strong> {{ meta.pessoa }}</p>
+        </div>
+    </div>
+
+    <!-- Links de ação para editar, deletar e voltar à lista -->
+    <a href="{% url 'meta-update' meta.pk %}" class="btn btn-warning">Editar</a>
+    <a href="{% url 'meta-delete' meta.pk %}" class="btn btn-danger">Deletar</a>
+    <a href="{% url 'meta-list' %}" class="btn btn-secondary">Voltar à Lista</a>
+{% endblock %}
