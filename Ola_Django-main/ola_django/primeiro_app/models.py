@@ -1,4 +1,5 @@
 from django.db import models
+from django import forms
 
 # Model for different types of people (e.g., customer, supplier, etc.)
 class TipoPessoa(models.Model):
@@ -53,6 +54,18 @@ class PerfilEconomia(models.Model):
     porcentagem_despesa_variavel = models.FloatField()
     porcentagem_despesa_geral = models.FloatField()
     porcentagem_investimento = models.FloatField()
+    ajuste_automatico = models.BooleanField(default=True)
+
+class PerfilEconomiaForm(forms.modelform):
+    class meta:
+        model = PerfilEconomia
+        fields = ['tipo', 'ajuste_automático']
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.isinstance.ajuste_automatico:
+            self.fields['tipo'].widget = forms.HiddenInput()
+
     
     def ajustar_tipo_economia(self, renda_mensal):
         despesas_fixas = Despesa.objects.filter(categoria="Fixa").aggregate(models.Sum('valor'))['valor_sum'] or 0
@@ -68,7 +81,7 @@ class PerfilEconomia(models.Model):
             self.porcentagem_despesa_geral = 5.0
             self.porcentagem_investimento = 10.0
         else:
-            self.tipo = 'Variavel'
+            self.tipo = 'Agressiva'
             self.porcentagem_despesa_fixa = 40.0
             self.porcentagem_despesa_variavel = 15.0
             self.porcentagem_despesa_geral = 5.0

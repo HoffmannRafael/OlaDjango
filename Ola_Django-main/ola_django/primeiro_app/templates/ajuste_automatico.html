@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Economia</title>
+    <style>
+        /* Estilos para o switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: 0.4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+    </style>
+</head>
+<body>
+
+<form method="post">
+    {% csrf_token %}
+    <label for="ajuste_automatico">Ajuste Automático</label>
+    <!-- Switch para o ajuste automático -->
+    <label class="switch">
+        <input type="checkbox" id="ajuste_automatico" name="ajuste_automatico" onchange="toggleTipoField()">
+        <span class="slider"></span>
+    </label>
+
+    <!-- Campo de seleção do tipo de economia -->
+    <div id="tipo_field" style="display: none; margin-top: 20px;">
+        <label for="tipo">Tipo de Economia</label>
+        <select name="tipo" id="tipo">
+            <option value="Passiva">Economia Passiva</option>
+            <option value="Agressiva">Economia Agressiva</option>
+        </select>
+    </div>
+
+    <button type="submit">Salvar</button>
+</form>
+
+<script>
+    // Função para exibir ou ocultar o campo "tipo" baseado no estado do switch
+    function toggleTipoField() {
+        const checkbox = document.getElementById("ajuste_automatico");
+        const tipoField = document.getElementById("tipo_field");
+        tipoField.style.display = checkbox.checked ? "none" : "block";
+    }
+
+    // Inicializa a visibilidade do campo baseado no estado atual do switch
+    toggleTipoField();
+</script>
+
+</body>
+</html>
