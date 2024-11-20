@@ -32,7 +32,9 @@ class Despesa(models.Model):
         ('Fixa', 'Despesa Fixa'),
         ('Variavel', 'Despesa Variável'),
         ('Geral', 'Despesa Geral'),
-        ('Investimento', 'Investimento')
+        ('Investimento', 'Investimento'),
+        ('Operacionais', 'Despesas operacionais'),
+        ('Não Operacionais', 'Despesas Não operacionais')
     ]
 
     categoria = models.CharField(max_length=15, choices=CATEGORIAS)
