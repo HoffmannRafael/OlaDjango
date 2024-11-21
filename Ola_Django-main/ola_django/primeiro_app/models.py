@@ -37,7 +37,7 @@ class Despesa(models.Model):
         ('Não Operacionais', 'Despesas Não operacionais')
     ]
 
-    categoria = models.CharField(max_length=15, choices=CATEGORIAS)
+    categoria = models.CharField(max_length=255, choices=CATEGORIAS)
     valor = models.FloatField()
     descricao = models.CharField(max_length=255, blank=True, null=True)
     data = models.DateField(auto_now_add=True)
@@ -58,7 +58,7 @@ class PerfilEconomia(models.Model):
     porcentagem_investimento = models.FloatField()
     ajuste_automatico = models.BooleanField(default=True)
 
-class PerfilEconomiaForm(forms.modelform):
+class PerfilEconomiaForm(forms.ModelForm):
     class meta:
         model = PerfilEconomia
         fields = ['tipo', 'ajuste_automático']

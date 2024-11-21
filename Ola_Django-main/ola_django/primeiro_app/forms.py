@@ -1,5 +1,5 @@
 from django import forms
-from .models import Pessoa
+from .models import Pessoa, Investimentos
 
 class PessoaCreateForm(forms.ModelForm):
     interacao = forms.CharField(widget=forms.Textarea)
@@ -17,3 +17,8 @@ class FormDeletePessoa(forms.ModelForm):
     class Meta:
         model = Pessoa
         fields = [] #Nenhum campo
+
+class InvestimentoForm(forms.ModelForm):
+    class Meta:
+        model = Investimentos
+        fields = ['pessoa', 'valor', 'prazo', 'frequencia']

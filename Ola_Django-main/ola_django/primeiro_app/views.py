@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DetailView, DeleteView
-from .models import Pessoa, InteracoesPessoa
-from .forms import PessoaCreateForm, PessoaUpdateForm, FormDeletePessoa 
+from .models import Pessoa, InteracoesPessoa, Investimentos
+from .forms import PessoaCreateForm, PessoaUpdateForm, FormDeletePessoa, InvestimentoForm
 from django.contrib import messages
 # Create your views here.
 #criação da tela de cadastro de pessoa
@@ -61,9 +61,44 @@ class PessoaDetailView(DetailView):
 
         return context
 
-
 class PessoaDeleteView(DeleteView):
     model = Pessoa
     form_class = FormDeletePessoa
     template_name = "deletar_pessoa.html"
     success_url = reverse_lazy('lista_pessoas')
+
+def listar_investimentos(request):
+    investimentos = Investimentos.objects.all()
+    return render(request, 'investimentos/listar.html', {'investimentos': investimentos})
+
+def detalhes_investimento(request, pk):
+    investimento = get_object_or_404(Investimentos, pk=pk)
+    return render(request, 'investimentos/detalhes.html', {'investimento': investimento})
+
+def criar_investimento(request):
+    if request.method == 'POST':
+        form = InvestimentoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('listar_investimentos'))
+    else:
+        form = InvestimentoForm()
+    return render(request, 'investimentos/form.html', {'form': form})
+
+def editar_investimento(request, pk):
+    investimento = get_object_or_404(Investimentos, pk=pk)
+    if request.method == 'POST':
+        form = InvestimentoForm(request.POST, instance=investimento)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('listar_investimentos'))
+    else:
+        form = InvestimentoForm(instance=investimento)
+    return render(request, 'investimentos/form.html', {'form': form})
+
+def deletar_investimento(request, pk):
+    investimento = get_object_or_404(Investimentos, pk=pk)
+    if request.method == 'POST':
+        investimento.delete()
+        return redirect(reverse('listar_investimentos'))
+    return render(request, 'investimentos/confirmar_delete.html', {'investimento': investimento})
