@@ -6,12 +6,10 @@
     <form method="post">
         {% csrf_token %}
         
-        <!-- Renderiza o formulário -->
         <div class="form-group">
             {{ form.as_p }}
         </div>
 
-        <!-- Botões de ação -->
         <button type="submit" class="btn btn-primary">Salvar</button>
         <a href="{% url 'meta-list' %}" class="btn btn-secondary">Cancelar</a>
     </form>

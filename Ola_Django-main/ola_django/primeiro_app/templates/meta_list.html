@@ -3,10 +3,8 @@
 {% block content %}
     <h1>Lista de Meta</h1>
 
-    <!-- Link para criar uma nova meta -->
     <a href="{% url 'meta-create' %}" class="btn btn-primary">Criar Nova Meta</a>
     
-    <!-- Verificação para exibir mensagem caso não haja meta -->
     {% if meta %}
         <table class="table">
             <thead>
@@ -37,4 +35,66 @@
     {% else %}
         <p>Nenhuma meta encontrada.</p>
     {% endif %}
+{% endblock %}
+
+
+{% for meta in meta %}
+    <div class="meta">
+        <h3>{{ meta.titulo }}</h3>
+        <p><strong>Valor Alvo:</strong> R$ {{ meta.valor }}</p>
+        <p><strong>Valor Atual:</strong> R$ {{ meta.valor_atual }}</p>
+        <p><strong>Progresso:</strong> {{ meta.progresso|floatformat:2 }}%</p>
+
+        <!-- Barra de Progresso -->
+        <div class="progress">
+            <div class="progress-bar" role="progressbar" style="width: {{ meta.progresso }}%;" 
+                 aria-valuenow="{{ meta.progresso }}" aria-valuemin="0" aria-valuemax="100">
+                {{ meta.progresso|floatformat:2 }}%
+            </div>
+        </div>
+    </div>
+{% endfor %}
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Lista de Metas</h1>
+
+    <style>
+        .progress {
+            width: 100%;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+            height: 20px;
+            margin-top: 10px;
+        }
+
+        .progress-bar {
+            background-color: #28a745;
+            height: 100%;
+            text-align: center;
+            color: white;
+            line-height: 20px;
+            transition: width 0.3s ease;
+        }
+    </style>
+
+    {% for meta in meta %}
+        <div class="meta">
+            <h3>{{ meta.titulo }}</h3>
+            <p><strong>Valor Alvo:</strong> R$ {{ meta.valor }}</p>
+            <p><strong>Valor Atual:</strong> R$ {{ meta.valor_atual }}</p>
+            <p><strong>Progresso:</strong> {{ meta.progresso|floatformat:2 }}%</p>
+
+            <div class="progress">
+                <div class="progress-bar" role="progressbar" style="width: {{ meta.progresso }}%;" 
+                     aria-valuenow="{{ meta.progresso }}" aria-valuemin="0" aria-valuemax="100">
+                    {{ meta.progresso|floatformat:2 }}%
+                </div>
+            </div>
+        </div>
+        <hr>
+    {% endfor %}
 {% endblock %}

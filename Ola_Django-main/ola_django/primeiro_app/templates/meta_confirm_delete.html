@@ -4,7 +4,7 @@
     <h1>Confirmar Exclusão</h1>
     <p>Tem certeza de que deseja excluir a meta <strong>{{ meta.titulo }}</strong>?</p>
     
-    <!-- Formulário de confirmação para deletar a meta -->
+
     <form method="post">
         {% csrf_token %}
         <button type="submit" class="btn btn-danger">Confirmar Exclusão</button>

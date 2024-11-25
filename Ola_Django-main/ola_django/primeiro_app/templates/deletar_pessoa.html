@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deletar Pessoa</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'deletar_pessoa.css' %}">  <!-- Ajuste para o CSS de deletar -->
+    <link rel="stylesheet" href="{% static 'deletar_pessoa.css' %}">  
 </head>
 <body>
     <div class="container">
@@ -22,8 +22,8 @@
             <div class="action-bar">
                 <button type="submit" class="btn delete-btn">Deletar Pessoa</button>
             </div>
-            <div class="action-bar"> <!-- Um novo container para o botão de voltar -->
-                <a href="{% url 'lista_pessoas' %}" class="btn btn-secondary">Voltar</a> <!-- Mantém a classe btn para estilo -->
+            <div class="action-bar"> 
+                <a href="{% url 'lista_pessoas' %}" class="btn btn-secondary">Voltar</a> 
             </div>
         </form>
     </div>
