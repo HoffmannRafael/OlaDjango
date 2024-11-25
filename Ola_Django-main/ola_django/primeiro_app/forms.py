@@ -6,7 +6,7 @@ class PessoaCreateForm(forms.ModelForm):
     interacao = forms.CharField(widget=forms.Textarea)
     class Meta:
         model = Pessoa
-        fields = '__all__' # alternativa para usar todos os campos -> '__all__'
+        fields = '__all__'
         
 class PessoaUpdateForm(forms.ModelForm):
         interacao = forms.CharField(widget=forms.Textarea)
@@ -17,7 +17,7 @@ class PessoaUpdateForm(forms.ModelForm):
 class FormDeletePessoa(forms.ModelForm):
     class Meta:
         model = Pessoa
-        fields = [] #Nenhum campo
+        fields = [] 
         
 class MetaForm(forms.ModelForm):
     class Meta:

@@ -39,7 +39,3 @@ class Meta(models.Model):
         if self.valor == 0:
             return 0
         return min((self.valor_atual / self.valor) * 100, 100)  
-
-    
-    
-    

@@ -5,7 +5,6 @@ from .models import Pessoa, InteracoesPessoa, Meta
 from .forms import PessoaCreateForm, PessoaUpdateForm, FormDeletePessoa, MetaForm
 from django.contrib import messages
 
-# Create your views here.
 #criação da tela de cadastro de pessoa
 class PessoaCreateView(CreateView):
     model = Pessoa
@@ -61,7 +60,6 @@ class PessoaDetailView(DetailView):
         context['interacoes_formatada'] = interacoes_formatada
 
         return context
-
 
 class PessoaDeleteView(DeleteView):
     model = Pessoa
