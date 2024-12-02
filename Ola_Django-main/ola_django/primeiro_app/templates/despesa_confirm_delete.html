@@ -1,0 +1,7 @@
+<h1>Deletar Despesa</h1>
+<p>Tem certeza que deseja deletar a despesa "{{ object }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Sim</button>
+    <a href="{% url 'despesa-list' %}">Cancelar</a>
+</form>

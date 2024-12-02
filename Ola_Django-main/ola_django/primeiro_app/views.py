@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DetailView, DeleteView
-from .models import Pessoa, InteracoesPessoa, Investimentos
+from .models import Pessoa, InteracoesPessoa, Investimentos, Despesa, PerfilEconomia
 from .forms import PessoaCreateForm, PessoaUpdateForm, FormDeletePessoa, InvestimentoForm
 from django.contrib import messages
 # Create your views here.
@@ -102,3 +102,49 @@ def deletar_investimento(request, pk):
         investimento.delete()
         return redirect(reverse('listar_investimentos'))
     return render(request, 'investimentos/confirmar_delete.html', {'investimento': investimento})
+
+# Views para Despesa
+class DespesaListView(ListView):
+    model = Despesa
+    template_name = 'despesa_list.html'
+    context_object_name = 'despesas'
+
+class DespesaCreateView(CreateView):
+    model = Despesa
+    fields = ['categoria', 'valor', 'descricao']
+    template_name = 'despesa_form.html'
+    success_url = reverse_lazy('despesa-list')
+
+class DespesaUpdateView(UpdateView):
+    model = Despesa
+    fields = ['categoria', 'valor', 'descricao']
+    template_name = 'despesa_form.html'
+    success_url = reverse_lazy('despesa-list')
+
+class DespesaDeleteView(DeleteView):
+    model = Despesa
+    template_name = 'despesa_confirm_delete.html'
+    success_url = reverse_lazy('despesa-list')
+
+# Views para PerfilEconomia
+class PerfilEconomiaListView(ListView):
+    model = PerfilEconomia
+    template_name = 'perfil_economia_list.html'
+    context_object_name = 'perfis'
+
+class PerfilEconomiaCreateView(CreateView):
+    model = PerfilEconomia
+    fields = ['tipo', 'ajuste_automatico', 'porcentagem_despesa_fixa', 'porcentagem_despesa_variavel', 'porcentagem_despesa_geral', 'porcentagem_investimento']
+    template_name = 'perfil_economia_form.html'
+    success_url = reverse_lazy('perfil-economia-list')
+
+class PerfilEconomiaUpdateView(UpdateView):
+    model = PerfilEconomia
+    fields = ['tipo', 'ajuste_automatico', 'porcentagem_despesa_fixa', 'porcentagem_despesa_variavel', 'porcentagem_despesa_geral', 'porcentagem_investimento']
+    template_name = 'perfil_economia_form.html'
+    success_url = reverse_lazy('perfil-economia-list')
+
+class PerfilEconomiaDeleteView(DeleteView):
+    model = PerfilEconomia
+    template_name = 'perfil_economia_confirm_delete.html'
+    success_url = reverse_lazy('perfil-economia-list')
