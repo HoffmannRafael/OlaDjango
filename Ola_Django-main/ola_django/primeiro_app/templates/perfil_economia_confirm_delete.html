@@ -1,0 +1,7 @@
+<h1>Deletar Perfil de Economia</h1>
+<p>Tem certeza que deseja deletar o perfil "{{ object }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Sim</button>
+    <a href="{% url 'perfil-economia-list' %}">Cancelar</a>
+</form>
