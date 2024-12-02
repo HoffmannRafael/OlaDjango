@@ -73,7 +73,6 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'oladjango',
         'USER' : 'root',
-        'PASSWORD' : 'teste123', #tem que modificar aqui
         'PASSWORD' : 'jh542002', #tem que modificar aqui
         'HOST' : 'localhost',
         'PORT' : '3306',
