@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse, reverse_lazy
 from django.views.generic import CreateView, ListView, UpdateView, DetailView, DeleteView
-from .models import Pessoa, InteracoesPessoa, Meta
-from .forms import PessoaCreateForm, PessoaUpdateForm, FormDeletePessoa, MetaForm
+from .models import Pessoa, InteracoesPessoa, Investimentos, Despesa, PerfilEconomia, Meta
+from .forms import PessoaCreateForm, PessoaUpdateForm, FormDeletePessoa, InvestimentoForm, MetaForm
 from django.contrib import messages
 
 #criação da tela de cadastro de pessoa
@@ -109,3 +109,85 @@ class MetaDeleteView(DeleteView):
     model = Meta
     template_name = 'meta/meta_confirm_delete.html'
     success_url = reverse_lazy('meta-list')
+
+def listar_investimentos(request):
+    investimentos = Investimentos.objects.all()
+    return render(request, 'investimentos/listar.html', {'investimentos': investimentos})
+
+def detalhes_investimento(request, pk):
+    investimento = get_object_or_404(Investimentos, pk=pk)
+    return render(request, 'investimentos/detalhes.html', {'investimento': investimento})
+
+def criar_investimento(request):
+    if request.method == 'POST':
+        form = InvestimentoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('listar_investimentos'))
+    else:
+        form = InvestimentoForm()
+    return render(request, 'investimentos/form.html', {'form': form})
+
+def editar_investimento(request, pk):
+    investimento = get_object_or_404(Investimentos, pk=pk)
+    if request.method == 'POST':
+        form = InvestimentoForm(request.POST, instance=investimento)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('listar_investimentos'))
+    else:
+        form = InvestimentoForm(instance=investimento)
+    return render(request, 'investimentos/form.html', {'form': form})
+
+def deletar_investimento(request, pk):
+    investimento = get_object_or_404(Investimentos, pk=pk)
+    if request.method == 'POST':
+        investimento.delete()
+        return redirect(reverse('listar_investimentos'))
+    return render(request, 'investimentos/confirmar_delete.html', {'investimento': investimento})
+
+# Views para Despesa
+class DespesaListView(ListView):
+    model = Despesa
+    template_name = 'despesa_list.html'
+    context_object_name = 'despesas'
+
+class DespesaCreateView(CreateView):
+    model = Despesa
+    fields = ['categoria', 'valor', 'descricao']
+    template_name = 'despesa_form.html'
+    success_url = reverse_lazy('despesa-list')
+
+class DespesaUpdateView(UpdateView):
+    model = Despesa
+    fields = ['categoria', 'valor', 'descricao']
+    template_name = 'despesa_form.html'
+    success_url = reverse_lazy('despesa-list')
+
+class DespesaDeleteView(DeleteView):
+    model = Despesa
+    template_name = 'despesa_confirm_delete.html'
+    success_url = reverse_lazy('despesa-list')
+
+# Views para PerfilEconomia
+class PerfilEconomiaListView(ListView):
+    model = PerfilEconomia
+    template_name = 'perfil_economia_list.html'
+    context_object_name = 'perfis'
+
+class PerfilEconomiaCreateView(CreateView):
+    model = PerfilEconomia
+    fields = ['tipo', 'ajuste_automatico', 'porcentagem_despesa_fixa', 'porcentagem_despesa_variavel', 'porcentagem_despesa_geral', 'porcentagem_investimento']
+    template_name = 'perfil_economia_form.html'
+    success_url = reverse_lazy('perfil-economia-list')
+
+class PerfilEconomiaUpdateView(UpdateView):
+    model = PerfilEconomia
+    fields = ['tipo', 'ajuste_automatico', 'porcentagem_despesa_fixa', 'porcentagem_despesa_variavel', 'porcentagem_despesa_geral', 'porcentagem_investimento']
+    template_name = 'perfil_economia_form.html'
+    success_url = reverse_lazy('perfil-economia-list')
+
+class PerfilEconomiaDeleteView(DeleteView):
+    model = PerfilEconomia
+    template_name = 'perfil_economia_confirm_delete.html'
+    success_url = reverse_lazy('perfil-economia-list')

@@ -1,0 +1,7 @@
+<h1>Deletar Investimento</h1>
+<p>Tem certeza que deseja deletar o investimento: "{{ investimento }}"?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Sim</button>
+    <a href="{% url 'listar_investimentos' %}">Não</a>
+</form>
