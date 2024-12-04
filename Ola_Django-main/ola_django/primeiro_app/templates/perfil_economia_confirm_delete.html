@@ -1,7 +1,28 @@
-<h1>Deletar Perfil de Economia</h1>
-<p>Tem certeza que deseja deletar o perfil "{{ object }}"?</p>
-<form method="post">
-    {% csrf_token %}
-    <button type="submit">Sim</button>
-    <a href="{% url 'perfil-economia-list' %}">Cancelar</a>
-</form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deletar Perfil de Economia</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <aside class="menu">
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="{% url 'perfil-economia-list' %}">Lista de Perfis</a></li>
+            </ul>
+        </aside>
+        <main class="content">
+            <h1>Deletar Perfil de Economia</h1>
+            <p>Tem certeza que deseja deletar o perfil "{{ object }}"?</p>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn">Sim</button>
+                <a href="{% url 'perfil-economia-list' %}" class="btn">Cancelar</a>
+            </form>
+        </main>
+    </div>
+</body>
+</html>
