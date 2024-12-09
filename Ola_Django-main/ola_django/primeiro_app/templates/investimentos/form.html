@@ -1,3 +1,6 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'investimentos.css' %}">
+
 <h1>{% if form.instance.pk %}Editar{% else %}Criar{% endif %} Investimento</h1>
 <form method="post">
     {% csrf_token %}
