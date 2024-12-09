@@ -1,11 +1,33 @@
-<h1>Lista de Perfis de Economia</h1>
-<a href="{% url 'perfil-economia-add' %}">Adicionar Perfil</a>
-<ul>
-    {% for perfil in perfis %}
-        <li>
-            {{ perfil.tipo }} - Ajuste Automático: {{ perfil.ajuste_automatico }}
-            <a href="{% url 'perfil-economia-edit' perfil.id %}">Editar</a>
-            <a href="{% url 'perfil-economia-delete' perfil.id %}">Deletar</a>
-        </li>
-    {% endfor %}
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Perfis de Economia</title>
+    <link rel="stylesheet" href="{% static 'despesas.css' %}">
+</head>
+<body>
+    <div class="container">
+        <aside class="menu">
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="{% url 'perfil-economia-list' %}">Lista de Perfis</a></li>
+                <li><a href="{% url 'perfil-economia-add' %}">Adicionar Perfil</a></li>
+            </ul>
+        </aside>
+        <main class="content">
+            <h1>Lista de Perfis de Economia</h1>
+            <ul>
+                {% for perfil in perfis %}
+                    <li>
+                        <strong>{{ perfil.tipo }}</strong> - Ajuste Automático: {{ perfil.ajuste_automatico }}
+                        <a href="{% url 'perfil-economia-edit' perfil.id %}" class="btn">Editar</a>
+                        <a href="{% url 'perfil-economia-delete' perfil.id %}" class="btn">Deletar</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </main>
+    </div>
+</body>
+</html>
+

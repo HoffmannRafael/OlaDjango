@@ -1,11 +1,32 @@
-<h1>Lista de Despesas</h1>
-<a href="{% url 'despesa-add' %}">Adicionar Despesa</a>
-<ul>
-    {% for despesa in despesas %}
-        <li>
-            {{ despesa.categoria }} - {{ despesa.valor }}
-            <a href="{% url 'despesa-edit' despesa.id %}">Editar</a>
-            <a href="{% url 'despesa-delete' despesa.id %}">Deletar</a>
-        </li>
-    {% endfor %}
-</ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Despesas</title>
+    <link rel="stylesheet" href="{% static 'despesas.css' %}">
+</head>
+<body>
+    <div class="container">
+        <aside class="menu">
+            <h2>Menu</h2>
+            <ul>
+                <li><a href="{% url 'despesa-list' %}">Lista de Despesas</a></li>
+                <li><a href="{% url 'despesa-add' %}">Adicionar Despesa</a></li>
+            </ul>
+        </aside>
+        <main class="content">
+            <h1>Lista de Despesas</h1>
+            <ul>
+                {% for despesa in despesas %}
+                    <li>
+                        <strong>{{ despesa.categoria }}</strong> - R$ {{ despesa.valor }}
+                        <a href="{% url 'despesa-edit' despesa.id %}" class="btn">Editar</a>
+                        <a href="{% url 'despesa-delete' despesa.id %}" class="btn">Deletar</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </main>
+    </div>
+</body>
+</html>
